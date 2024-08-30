@@ -1,8 +1,11 @@
 import 'package:audio_player/my_app.dart';
+import 'package:audio_player/services/player_service.dart';
 import 'package:flutter/material.dart';
-import 'package:fvp/fvp.dart' as fvp;
+import 'package:provider/provider.dart';
 
 void main() {
-  fvp.registerWith();
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => PlayerService(),
+    child: const MyApp(),
+  ));
 }
