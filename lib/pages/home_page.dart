@@ -120,7 +120,8 @@ class _HomePageState extends State<HomePage> {
         builder: (context) => AlertDialog(
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(2))),
-                title: const TitleCustom(text: "Playlist"),
+                title: TitleCustom(
+                    text: "Playlist - ${playerService.playlist.length} files"),
                 content: StatefulBuilder(
                   builder: (context, customSetState) => Container(
                     constraints: const BoxConstraints(maxWidth: 350),
