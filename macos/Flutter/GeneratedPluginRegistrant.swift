@@ -5,8 +5,12 @@
 import FlutterMacOS
 import Foundation
 
-import fvp
+import audioplayers_darwin
+import path_provider_foundation
+import shared_preferences_foundation
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  FvpPlugin.register(with: registry.registrar(forPlugin: "FvpPlugin"))
+  AudioplayersDarwinPlugin.register(with: registry.registrar(forPlugin: "AudioplayersDarwinPlugin"))
+  PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
+  SharedPreferencesPlugin.register(with: registry.registrar(forPlugin: "SharedPreferencesPlugin"))
 }
