@@ -1,9 +1,8 @@
 import 'dart:math';
-
-import 'package:audio_player/model/song_model.dart';
 import 'package:audio_player/repositories/app_settings_repository.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class PlayerService extends ChangeNotifier {
   AppSettingsRepository appSettingsRepository = AppSettingsRepository();
@@ -15,11 +14,6 @@ class PlayerService extends ChangeNotifier {
 
     // Set the release mode to keep the source after playback has completed.
     player.setReleaseMode(ReleaseMode.stop);
-
-    // Start the player as soon as the app is displayed.
-    if (playlist.isNotEmpty) {
-      setSong(playlist[songIndex].songPath);
-    }
 
     player.onPlayerComplete.listen((event) async {
       nextSong();
@@ -65,7 +59,7 @@ class PlayerService extends ChangeNotifier {
       songIndex++;
     }
 
-    setSong(playlist[songIndex].songPath);
+    setSong(playlist[songIndex].data);
     notifyListeners();
   }
 
@@ -77,7 +71,8 @@ class PlayerService extends ChangeNotifier {
       return;
     }
     songIndex--;
-    setSong(playlist[songIndex].songPath);
+
+    setSong(playlist[songIndex].data);
     notifyListeners();
   }
 
