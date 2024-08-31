@@ -119,47 +119,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
             ),
           ],
         ),
-        const SizedBox(height: 5),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              key: const Key('mode_button'),
-              onPressed: widget.changeRepeatMode,
-              icon: widget.repeatMode != null &&
-                      widget.repeatMode == RepeatType.random
-                  ? const Icon(Icons.shuffle)
-                  : widget.repeatMode == RepeatType.linear
-                      ? const Icon(Icons.repeat)
-                      : const Icon(Icons.repeat_one),
-            ),
-            IconButton(
-              key: const Key('rewind_button'),
-              onPressed: widget.previousSong,
-              icon: const Icon(Icons.fast_rewind),
-            ),
-            IconButton(
-              key: const Key('play_button'),
-              onPressed: _isPlaying ? _pause : _play,
-              icon: _isPlaying
-                  ? const Icon(Icons.pause)
-                  : const Icon(Icons.play_arrow),
-            ),
-            IconButton(
-              key: const Key('foward_button'),
-              onPressed: widget.nextSong,
-              icon: const Icon(Icons.fast_forward),
-            ),
-            IconButton(
-              key: const Key('options_button'),
-              onPressed: _mute,
-              icon: _volume > 0
-                  ? const Icon(Icons.volume_up)
-                  : const Icon(Icons.volume_off),
-            ),
-          ],
-        ),
+        const SizedBox(height: 10),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -183,13 +143,14 @@ class _PlayerWidgetState extends State<PlayerWidget> {
           ],
         ),
         SliderTheme(
-          data: const SliderThemeData(
-              thumbColor: Colors.grey,
+          data: SliderThemeData(
+              thumbColor: Theme.of(context).colorScheme.tertiary,
+              activeTickMarkColor: Theme.of(context).colorScheme.tertiary,
               trackHeight: 1,
               activeTrackColor: Colors.grey,
-              valueIndicatorShape: RoundSliderThumbShape(),
+              valueIndicatorShape: const RoundSliderThumbShape(),
               minThumbSeparation: 10,
-              thumbShape: RoundSliderThumbShape(
+              thumbShape: const RoundSliderThumbShape(
                   elevation: 0, enabledThumbRadius: 5, pressedElevation: 0)),
           child: Slider(
             label: _durationText,
@@ -208,6 +169,52 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                 ? _position!.inMilliseconds / _duration!.inMilliseconds
                 : 0.0,
           ),
+        ),
+        const SizedBox(height: 5),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              key: const Key('mode_button'),
+              onPressed: widget.changeRepeatMode,
+              icon: Icon(
+                  widget.repeatMode != null &&
+                          widget.repeatMode == RepeatType.random
+                      ? Icons.shuffle_rounded
+                      : widget.repeatMode == RepeatType.linear
+                          ? Icons.repeat_rounded
+                          : Icons.repeat_one_rounded,
+                  size: 32),
+            ),
+            IconButton(
+              key: const Key('rewind_button'),
+              onPressed: widget.previousSong,
+              icon: const Icon(
+                Icons.fast_rewind_rounded,
+                size: 32,
+              ),
+            ),
+            IconButton(
+              key: const Key('play_button'),
+              onPressed: _isPlaying ? _pause : _play,
+              icon: _isPlaying
+                  ? const Icon(Icons.pause_circle, size: 64)
+                  : const Icon(Icons.play_circle, size: 64),
+            ),
+            IconButton(
+              key: const Key('foward_button'),
+              onPressed: widget.nextSong,
+              icon: const Icon(Icons.fast_forward_rounded, size: 32),
+            ),
+            IconButton(
+              key: const Key('options_button'),
+              onPressed: _mute,
+              icon: _volume > 0
+                  ? const Icon(Icons.volume_up_rounded, size: 32)
+                  : const Icon(Icons.volume_off_rounded, size: 32),
+            ),
+          ],
         ),
       ],
     );
