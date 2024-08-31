@@ -222,6 +222,7 @@ class _HomePageState extends State<HomePage> {
               width: double.maxFinite,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const LabelCustom(text: "Volume"),
@@ -301,41 +302,46 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  Container(
-                    clipBehavior: Clip.hardEdge, // this
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 0, color: Colors.transparent),
-                    ),
+                  Visibility(
+                    visible: Platform.isWindows ||
+                        Platform.isLinux ||
+                        Platform.isMacOS,
+                    child: Container(
+                      clipBehavior: Clip.hardEdge, // this
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0, color: Colors.transparent),
+                      ),
 
-                    width: double.maxFinite,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: paths.length,
-                      itemBuilder: (context, index) {
-                        var path = paths[index];
-                        return Slidable(
-                          startActionPane: ActionPane(
-                              extentRatio: 0.4,
-                              motion: const DrawerMotion(),
-                              children: [
-                                SlidableAction(
-                                  label: "Remover",
-                                  backgroundColor: Colors.red,
-                                  onPressed: (context) {
-                                    setState(() {
-                                      paths = paths
-                                          .where((path_) => path_ != path)
-                                          .toList();
-                                    });
-                                  },
-                                  icon: Icons.delete,
-                                )
-                              ]),
-                          child: ListTile(
-                            title: Text(path),
-                          ),
-                        );
-                      },
+                      width: double.maxFinite,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: paths.length,
+                        itemBuilder: (context, index) {
+                          var path = paths[index];
+                          return Slidable(
+                            startActionPane: ActionPane(
+                                extentRatio: 0.4,
+                                motion: const DrawerMotion(),
+                                children: [
+                                  SlidableAction(
+                                    label: "Remover",
+                                    backgroundColor: Colors.red,
+                                    onPressed: (context) {
+                                      setState(() {
+                                        paths = paths
+                                            .where((path_) => path_ != path)
+                                            .toList();
+                                      });
+                                    },
+                                    icon: Icons.delete,
+                                  )
+                                ]),
+                            child: ListTile(
+                              title: Text(path),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
@@ -350,7 +356,11 @@ class _HomePageState extends State<HomePage> {
                     _pegarPaths();
                     Navigator.pop(context);
                   },
-                  child: const Text("Salvar"))
+                  child: Text(
+                    "Salvar",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary),
+                  ))
             ],
           ),
         );
