@@ -1,4 +1,6 @@
 import 'package:audio_player/pages/home_page.dart';
+import 'package:audio_player/theme/dark_theme.dart';
+import 'package:audio_player/theme/light_theme.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -10,13 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        sliderTheme: const SliderThemeData(
-          showValueIndicator: ShowValueIndicator.always,
-        ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
-        useMaterial3: true,
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: const HomePage(),
     );
   }
