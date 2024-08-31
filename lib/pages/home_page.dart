@@ -168,6 +168,8 @@ class _HomePageState extends State<HomePage> {
                               return ListTile(
                                 key: ValueKey(index),
                                 selected: playerService.songIndex == index,
+                                selectedColor:
+                                    Theme.of(context).colorScheme.tertiary,
                                 title: Row(
                                   children: [
                                     Expanded(
